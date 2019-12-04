@@ -11,13 +11,13 @@ import { AuthService } from './auth.service';
 })
 export class DataStorageService {
   private endPointURL: string = 'https://recipe-book-51833.firebaseio.com/';
-  private url = `${ this.endPointURL }/recipes.json`;
+  private url = `${this.endPointURL}/recipes.json`;
 
   constructor(
     private httpClient: HttpClient,
     private recipeService: RecipeService,
     private authService: AuthService
-    ) {}
+  ) { }
 
   public saveRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipes();
@@ -25,16 +25,9 @@ export class DataStorageService {
   }
 
   public fetchRecipes() {
-    return this.authService.authenticatedUser.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.httpClient.get<Recipe>(
-          this.url,
-          {
-            params: new HttpParams().set('auth', user.token)
-          }
-        );
-      }),
+    return this.httpClient.get<Recipe[]>(
+      this.url
+    ).pipe(
       map((recipes) => {
         return recipes.map(rec => {
           return { ...rec, ingredients: rec.ingredients ? rec.ingredients : [] };
