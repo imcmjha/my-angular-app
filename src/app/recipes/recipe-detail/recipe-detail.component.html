@@ -1,0 +1,41 @@
+<div *ngIf="recipe; else noRecipe">
+  <div class="row">
+    <div class="col-xs-12">
+      <img [src]="recipe.imgURL" [alt]="recipe.description" style="max-height: 250px;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8">
+      <h2>{{ recipe.name }}</h2>
+    </div>
+    <div class="col-xs-4">
+      <div class="btn-group" appDropdown>
+        <button class="btn btn-primary dropdown-toggle">
+          Manage <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a style="cursor: pointer;" (click)="toShoppingList()">To shopping List</a></li>
+          <li><a style="cursor: pointer;" (click)="toEditRecipt()">Edit Recipe</a></li>
+          <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete recipe</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>{{ recipe.description }} </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let ing of recipe.ingredients">
+          {{ing.name}}<span class="badge pull-right" hoverHignlight>{{ ing.amount }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-template #noRecipe>
+  <p>There is no recipe selected.</p>
+</ng-template>
