@@ -30,7 +30,7 @@ export class AuthService {
   public authenticatedUser = new BehaviorSubject<User>(null);
   private signUpEndPoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
   private loginEndPoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
-  private key: string = 'AIzaSyBPY7Ht8RaXEkSFgT55uf5SFU3L_t75R1A';
+  private key: string = '/* auth key */';
   private authTimer: any;
 
   constructor(private http: HttpClient, private router: Router) { }
